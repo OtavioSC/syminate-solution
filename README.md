@@ -33,7 +33,7 @@ O projeto foi criado com o Watson Assistant, então caso queira acessar o códig
 
 <br>
 
-# Como utilizar o chatbot
+# Como acessar o chatbot
 
 ### Acesse o live preview
 
@@ -57,5 +57,11 @@ O projeto foi criado com o Watson Assistant, então caso queira acessar o códig
   <img align="center" width="300" height="500" src="./images/saudacao.png">
 </p>
 
+<br>
+
+# Como fazer upload do chatbot
+
+
 # Link do video
 
+    ...
