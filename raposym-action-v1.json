@@ -1,0 +1,2957 @@
+{
+  "name": "Raposym-action",
+  "type": "action",
+  "counts": {
+    "actions": 9,
+    "intents": 7,
+    "entities": 5,
+    "data_types": 4,
+    "global_variables": 2
+  },
+  "status": "Available",
+  "language": "pt-br",
+  "skill_id": "62b8ac82-2959-43dd-979a-262faa4a6e5c",
+  "workspace": {
+    "actions": [
+      {
+        "steps": [
+          {
+            "step": "step_001",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Acho que não entendi. Reformule sua pergunta."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_001",
+            "condition": {
+              "lte": [
+                {
+                  "system_variable": "no_action_matches_count"
+                },
+                {
+                  "scalar": 3
+                }
+              ]
+            },
+            "next_step": "step_002"
+          },
+          {
+            "step": "step_002",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "fallback",
+                "parameters": null,
+                "result_variable": "step_002_result_1"
+              }
+            },
+            "variable": "step_002",
+            "condition": {
+              "gt": [
+                {
+                  "system_variable": "no_action_matches_count"
+                },
+                {
+                  "scalar": 3
+                }
+              ]
+            }
+          }
+        ],
+        "title": "No action matches",
+        "action": "anything_else",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "expression": "anything_else"
+        },
+        "variables": [
+          {
+            "title": "Receio não entender o que você está perguntando, por favor, refo",
+            "variable": "step_001",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_002",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_002_result_1",
+            "data_type": "any"
+          }
+        ],
+        "disambiguation_opt_out": true
+      },
+      {
+        "steps": [
+          {
+            "step": "step_001",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Acho que não entendi. Eu posso conectar você a um agente."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Vamos mandá-lo para um agente disponível."
+                },
+                "agent_unavailable": {
+                  "message": "Não há agentes disponíveis neste momento. Quando houver um disponível, conectaremos você."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "step_001",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "Step validation failed"
+                }
+              ]
+            },
+            "next_step": "step_002"
+          },
+          {
+            "step": "step_002",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Desculpe não poder ajudá-lo. Vou conectá-lo a um agente imediatamente."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Vamos mandá-lo para um agente disponível."
+                },
+                "agent_unavailable": {
+                  "message": "Não há agentes disponíveis neste momento. Quando houver um disponível, conectaremos você."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "step_002",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "Agent requested"
+                }
+              ]
+            },
+            "next_step": "step_003"
+          },
+          {
+            "step": "step_003",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Acho que não entendi o que você está pedindo; vou conectá-lo a um agente."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Vamos mandá-lo para um agente disponível."
+                },
+                "agent_unavailable": {
+                  "message": "Não há agentes disponíveis neste momento. Quando houver um disponível, conectaremos você."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "step_003",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "No action matches"
+                }
+              ]
+            }
+          }
+        ],
+        "title": "Fallback",
+        "action": "fallback",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "fallback_connect_to_agent"
+        },
+        "variables": [
+          {
+            "title": "Acho que não entendi. Eu posso conectar você a um agente.",
+            "variable": "step_001",
+            "data_type": "any"
+          },
+          {
+            "title": "Desculpe não poder ajudá-lo. Vou conectá-lo a um agente imediata",
+            "variable": "step_002",
+            "data_type": "any"
+          },
+          {
+            "title": "Acho que não entendi o que você está pedindo; vou conectá-lo a u",
+            "variable": "step_003",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "anything_else",
+        "disambiguation_opt_out": true
+      },
+      {
+        "steps": [
+          {
+            "step": "step_336",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Oi, qual o seu **nome**?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": []
+            },
+            "handlers": [],
+            "question": {
+              "free_text": true,
+              "only_populate_when_prompted": true
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_336",
+            "next_step": "step_943"
+          },
+          {
+            "step": "step_943",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Um prazer te conhecer. Me chamo Raposym e sou um assistente virtual. Gostaria de ouvir minha historia?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Sim",
+                      "value": {
+                        "input": {
+                          "text": "Sim"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Não",
+                      "value": {
+                        "input": {
+                          "text": "Não"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text": "Eu não entendi, reformule sua resposta."
+                        }
+                      ],
+                      "response_type": "text"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "sys-yes-no",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_943",
+            "next_step": "step_534"
+          },
+          {
+            "step": "step_534",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Minha história começa em 2021, onde um grupo de alunos da faculdade FIAP teve a ideia de criar uma solução para ajudar pessoas com transtornos leves de ansiedade. Raposym vem do animal raposa, culturalmente conhecida por sua característica acolhedora. Já o sufixo “sym”, vem de **sympathetic nervous system**,"
+                          },
+                          {
+                            "scalar": " que inglês indica uma parte do nosso sistema nervoso responsável pela ativação de sentimentos relacionados a estresse."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_34738",
+                "parameters": null,
+                "result_variable": "step_534_result_1"
+              }
+            },
+            "variable": "step_534",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_943"
+                },
+                {
+                  "scalar": "yes"
+                }
+              ]
+            },
+            "next_step": "step_805"
+          },
+          {
+            "step": "step_805",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Tudo bem."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_34738",
+                "parameters": null,
+                "result_variable": "step_805_result_1"
+              }
+            },
+            "variable": "step_805",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_943"
+                },
+                {
+                  "scalar": "no"
+                }
+              ]
+            }
+          }
+        ],
+        "title": "Boas vindas",
+        "action": "action_1798",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_1798_intent_18602"
+        },
+        "variables": [
+          {
+            "variable": "step_153_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_175_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_302_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Oi, qual o seu **nome**?",
+            "variable": "step_336",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_336_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_421_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_436_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_483_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_494_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Minha história começa em 2021, onde um grupo de alunos da faculd",
+            "variable": "step_534",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_534_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_543_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_756_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_764_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_804_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Tudo bem.",
+            "variable": "step_805",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_805_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Um prazer te conhecer. Me chamo Raposym e sou um assistente virt",
+            "variable": "step_943",
+            "data_type": "yes_no"
+          },
+          {
+            "variable": "step_943_result_1",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "fallback",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "steps": [
+          {
+            "step": "step_914",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Parece que o seu problema é bem sério, e os meus exercícios podem não te ajudar a melhorar.\n\nComo nós da Syminate prezamos pela saúde de nossos usuários, gostaria de recomendar alguns links para que você busque ajuda especializada."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_914",
+            "next_step": "step_429"
+          },
+          {
+            "step": "step_429",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "https://www.eyhe.com.br/\n\nhttps://g1.globo.com/bemestar/viva-voce/noticia/2021/04/25/veja-onde-buscar-atendimento-psicologico-on-line-gratuito-ou-pagando-valor-social.ghtml"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_429",
+            "next_step": "step_628"
+          },
+          {
+            "step": "step_628",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Infelizmente não posso te ajudar, mas tenho certeza que um profissional especializado irá.\n\nUma ótima recuperação. Fique bem 🙂"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_628"
+          }
+        ],
+        "title": "Profissional",
+        "action": "action_14827",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_14827_intent_32525"
+        },
+        "variables": [
+          {
+            "variable": "step_175_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_421_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "https://www.eyhe.com.br/ https://g1.globo.com/bemestar/viva-voce",
+            "variable": "step_429",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_494_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_534_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Infelizmente não posso te ajudar, mas tenho certeza que um profi",
+            "variable": "step_628",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_805_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Parece que o seu problema é bem sério, e os meus exercícios pode",
+            "variable": "step_914",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_943_result_1",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "action_34738",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "steps": [
+          {
+            "step": "step_934",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Você finalizou o exercício ?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Sim",
+                      "value": {
+                        "input": {
+                          "text": "Sim"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Não",
+                      "value": {
+                        "input": {
+                          "text": "Não"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text": "Eu não entendi, reformule sua resposta."
+                        }
+                      ],
+                      "response_type": "text"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "sys-yes-no",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_934",
+            "next_step": "step_327"
+          },
+          {
+            "step": "step_327",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Parabéns !! Está se sentindo melhor ?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Sim",
+                      "value": {
+                        "input": {
+                          "text": "Sim"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Não",
+                      "value": {
+                        "input": {
+                          "text": "Não"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text": "Eu não entendi, reformule sua resposta."
+                        }
+                      ],
+                      "response_type": "text"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "sys-yes-no",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_327",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_934"
+                },
+                {
+                  "scalar": "yes"
+                }
+              ]
+            },
+            "next_step": "step_756"
+          },
+          {
+            "step": "step_756",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Muito legal!! Que bom que consegui te ajudar. Lembre-se que sou um assistente para casos leves e pouco cotidianos, se os sintomas persistirem, busque uma ajuda profissional. Abaixo estão alguma recomendações:\n\n<br />\n\n\n\nhttps://www.eyhe.com.br/\n\nhttps://g1.globo.com/bemestar/viva-voce/noticia/2021/04/25/veja-onde-buscar-atendimento-psicologico-on-line-gratuito-ou-pagando-valor-social.ghtml"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action",
+              "invoke_action": {
+                "action": "action_15486",
+                "parameters": null,
+                "result_variable": "step_756_result_1"
+              }
+            },
+            "variable": "step_756",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_327"
+                },
+                {
+                  "scalar": "yes"
+                }
+              ]
+            },
+            "next_step": "step_888"
+          },
+          {
+            "step": "step_888",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Gostaria de tentar realizar outro tipo de exercício?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Sim",
+                      "value": {
+                        "input": {
+                          "text": "Sim"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Não",
+                      "value": {
+                        "input": {
+                          "text": "Não"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text": "Eu não entendi, reformule sua resposta."
+                        }
+                      ],
+                      "response_type": "text"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "sys-yes-no",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_888",
+            "condition": {
+              "or": [
+                {
+                  "and": [
+                    {
+                      "eq": [
+                        {
+                          "variable": "step_934"
+                        },
+                        {
+                          "scalar": "no"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "and": [
+                    {
+                      "eq": [
+                        {
+                          "variable": "step_327"
+                        },
+                        {
+                          "scalar": "no"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "next_step": "step_436"
+          },
+          {
+            "step": "step_436",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_16791",
+                "parameters": null,
+                "result_variable": "step_436_result_1"
+              }
+            },
+            "variable": "step_436",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_888"
+                },
+                {
+                  "scalar": "yes"
+                }
+              ]
+            },
+            "next_step": "step_483"
+          },
+          {
+            "step": "step_483",
+            "output": {
+              "generic": []
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_14827",
+                "parameters": null,
+                "result_variable": "step_483_result_1"
+              }
+            },
+            "variable": "step_483",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_888"
+                },
+                {
+                  "scalar": "no"
+                }
+              ]
+            }
+          }
+        ],
+        "title": "Finalização",
+        "action": "action_14495",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_14495_intent_25860"
+        },
+        "variables": [
+          {
+            "variable": "step_175_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Parabéns !! Está se sentindo melhor ?",
+            "variable": "step_327",
+            "data_type": "yes_no"
+          },
+          {
+            "variable": "step_421_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "No response",
+            "variable": "step_436",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_436_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "No response",
+            "variable": "step_483",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_483_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_494_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_534_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_543_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Muito legal!! Que bom que consegui te ajudar. Lembre-se que sou ",
+            "variable": "step_756",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_756_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_805_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Gostaria de tentar realizar outro tipo de exercício?",
+            "variable": "step_888",
+            "data_type": "yes_no"
+          },
+          {
+            "title": "Você finalizou o exercício ?",
+            "variable": "step_934",
+            "data_type": "yes_no"
+          },
+          {
+            "variable": "step_943_result_1",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "action_16791",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "steps": [
+          {
+            "step": "step_001",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Bem-vindo, como posso ajudá-lo?"
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_001"
+          }
+        ],
+        "title": "Greet customer",
+        "action": "welcome",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "expression": "welcome"
+        },
+        "variables": [
+          {
+            "variable": "step_001",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "action_15486",
+        "disambiguation_opt_out": true
+      },
+      {
+        "steps": [
+          {
+            "step": "step_553",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Agradecemos o seu contato, volte sempre que precisar.\n\nFique bem e cuide de sua saúde.\n\n<br />\n\n\n\nTchau!"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_553"
+          }
+        ],
+        "title": "Tchau",
+        "action": "action_15486",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_15486_intent_14452"
+        },
+        "variables": [
+          {
+            "variable": "step_153_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_175_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_302_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_421_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_436_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_483_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_494_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_534_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_543_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Agradecemos o seu contato, volte sempre que precisar. Fique bem ",
+            "variable": "step_553",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_756_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_764_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_804_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_805_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_943_result_1",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "action_14495",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "steps": [
+          {
+            "step": "step_450",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Qual dos exercícios abaixo você gostaria/poderia realizar ?\n\n<br />\n\n\n\n\n  - Meditação\n  - Respiração\n  - Ioga\n  - 5 sentidos\n  - Nenhum"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "response_type": "response_from_data_type",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text": "Eu não entendi. Selecione uma opção válida:"
+                        }
+                      ],
+                      "response_type": "text"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "data_type": "data-type_43954",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_450",
+            "next_step": "step_175"
+          },
+          {
+            "step": "step_175",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_14827",
+                "parameters": null,
+                "result_variable": "step_175_result_1"
+              }
+            },
+            "variable": "step_175",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_450"
+                },
+                {
+                  "value": "Nenhum",
+                  "from_entity": "entity_5876"
+                }
+              ]
+            },
+            "next_step": "step_794"
+          },
+          {
+            "step": "step_794",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Acesse o link abaixo, sente-se em algum lugar confortavel, feche os olhos e ouça o video:\n\n[aqui](https://www.youtube.com/watch?v=Z1y3Alas8Zs)\n\n<br />\n\n\n\nQuando terminar, volte aqui e me confirme."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "response_type": "response_from_data_type",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text": "Eu não entendi. Selecione uma opção válida:"
+                        }
+                      ],
+                      "response_type": "text"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "data_type": "data-type_46236",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_794",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_450"
+                },
+                {
+                  "value": "Meditação",
+                  "from_entity": "entity_5876"
+                }
+              ]
+            },
+            "next_step": "step_531"
+          },
+          {
+            "step": "step_531",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Assista o video abaixo e realize os movimentos indicados pela professora:\n\n[aqui](https://www.youtube.com/watch?v=KCkOCxPSlKE)\n\n<br />\n\n\n\nQuando terminar, volte aqui e me confirme."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "response_type": "response_from_data_type",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text": "Eu não entendi. Selecione uma opção válida:"
+                        }
+                      ],
+                      "response_type": "text"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "data_type": "data-type_46236",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_531",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_450"
+                },
+                {
+                  "value": "Ioga",
+                  "from_entity": "entity_5876"
+                }
+              ]
+            },
+            "next_step": "step_382"
+          },
+          {
+            "step": "step_382",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Quero que voce liste mentalmente:\n\n<br />\n\n\n\n\n  - 5 coisas que você consegue **ver** ao seu redor\n  - 4 sons que você pode **ouvir** neste momento\n  - 3 coisas que você pode **tocar** sem sair do lugar\n  - 2 **aromas** que você consegue sentir no ambiente\n  - 1 **sabor** que você pode provar, seja aquele que já está na sua boca ou um copo de água.\n\n<br />\n\n\n\nQuando terminar,"
+                          },
+                          {
+                            "scalar": " volte aqui e me confirme."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "response_type": "response_from_data_type",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text": "Eu não entendi. Selecione uma opção válida:"
+                        }
+                      ],
+                      "response_type": "text"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "data_type": "data-type_46236",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_382",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_450"
+                },
+                {
+                  "value": "5 sentidos",
+                  "from_entity": "entity_5876"
+                }
+              ]
+            },
+            "next_step": "step_153"
+          },
+          {
+            "step": "step_153",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Vamos la: Inspire e expire por 5 minutos, bem devagar.\n\n<br />\n\n\n\nQuando terminar, volte aqui e me confirme."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "response_type": "response_from_data_type",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text": "Eu não entendi. Selecione uma opção válida:"
+                        }
+                      ],
+                      "response_type": "text"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "data_type": "data-type_46236",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_153",
+            "next_step": "step_764"
+          },
+          {
+            "step": "step_764",
+            "handlers": [],
+            "resolver": {
+              "type": "replay",
+              "clear": [
+                {
+                  "variable": "step_450"
+                }
+              ]
+            },
+            "variable": "step_764",
+            "condition": {
+              "or": [
+                {
+                  "and": [
+                    {
+                      "eq": [
+                        {
+                          "variable": "step_794"
+                        },
+                        {
+                          "value": "Não vou fazer",
+                          "from_entity": "entity_15403"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "and": [
+                    {
+                      "eq": [
+                        {
+                          "variable": "step_531"
+                        },
+                        {
+                          "value": "Não vou fazer",
+                          "from_entity": "entity_15403"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "and": [
+                    {
+                      "eq": [
+                        {
+                          "variable": "step_382"
+                        },
+                        {
+                          "value": "Não vou fazer",
+                          "from_entity": "entity_15403"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "and": [
+                    {
+                      "eq": [
+                        {
+                          "variable": "step_153"
+                        },
+                        {
+                          "value": "Não vou fazer",
+                          "from_entity": "entity_15403"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "next_step": "step_540"
+          },
+          {
+            "step": "step_540",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_14495",
+                "parameters": null,
+                "result_variable": "step_540_result_1"
+              }
+            },
+            "variable": "step_540",
+            "condition": {
+              "or": [
+                {
+                  "and": [
+                    {
+                      "eq": [
+                        {
+                          "variable": "step_153"
+                        },
+                        {
+                          "value": "Terminei",
+                          "from_entity": "entity_15403"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "and": [
+                    {
+                      "eq": [
+                        {
+                          "variable": "step_794"
+                        },
+                        {
+                          "value": "Terminei",
+                          "from_entity": "entity_15403"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "and": [
+                    {
+                      "eq": [
+                        {
+                          "variable": "step_531"
+                        },
+                        {
+                          "value": "Terminei",
+                          "from_entity": "entity_15403"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "and": [
+                    {
+                      "eq": [
+                        {
+                          "variable": "step_382"
+                        },
+                        {
+                          "value": "Terminei",
+                          "from_entity": "entity_15403"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "title": "Exercicios",
+        "action": "action_16791",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_16791_intent_15896"
+        },
+        "variables": [
+          {
+            "title": "Vamos la: Inspire e expire por 5 minutos, bem devagar. <br /> Qu",
+            "variable": "step_153",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_153_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "No response",
+            "variable": "step_175",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_175_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_302_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Quero que voce liste mentalmente: <br /> - 5 coisas que você con",
+            "variable": "step_382",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_421_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_436_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Qual dos exercícios abaixo você gostaria/poderia realizar ? <br ",
+            "variable": "step_450",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_483_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_494_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Assista o video abaixo e realize os movimentos indicados pela pr",
+            "variable": "step_531",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_534_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "No response",
+            "variable": "step_540",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_540_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_543_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_756_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "No response",
+            "variable": "step_764",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_764_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Acesse o link abaixo, sente-se em algum lugar confortavel, feche",
+            "variable": "step_794",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_804_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_805_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_852_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_896_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_943_result_1",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "action_14827",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "steps": [
+          {
+            "step": "step_776",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Como você está se sentindo ?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "response_type": "response_from_data_type",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text": "Eu não entendi. Selecione uma opção válida:"
+                        }
+                      ],
+                      "response_type": "text"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "data_type": "data-type_48724",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_776",
+            "next_step": "step_394"
+          },
+          {
+            "step": "step_394",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Posso te ajudar. Você gostaria de uma recomendação de exercício ?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Sim",
+                      "value": {
+                        "input": {
+                          "text": "Sim"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Não",
+                      "value": {
+                        "input": {
+                          "text": "Não"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text": "Eu não entendi, reformule sua resposta."
+                        }
+                      ],
+                      "response_type": "text"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "sys-yes-no",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_394",
+            "condition": {
+              "or": [
+                {
+                  "and": [
+                    {
+                      "eq": [
+                        {
+                          "variable": "step_776"
+                        },
+                        {
+                          "value": "Mal",
+                          "from_entity": "entity_15219"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "and": [
+                    {
+                      "eq": [
+                        {
+                          "variable": "step_776"
+                        },
+                        {
+                          "value": "Mais ou menos",
+                          "from_entity": "entity_15219"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "next_step": "step_421"
+          },
+          {
+            "step": "step_421",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Certo. Me conte tudo sobre o que está passando."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "question": {
+              "free_text": true,
+              "only_populate_when_prompted": true
+            },
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_14827",
+                "parameters": null,
+                "result_variable": "step_421_result_1"
+              }
+            },
+            "variable": "step_421",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_394"
+                },
+                {
+                  "scalar": "no"
+                }
+              ]
+            },
+            "next_step": "step_494"
+          },
+          {
+            "step": "step_494",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_16791",
+                "parameters": null,
+                "result_variable": "step_494_result_1"
+              }
+            },
+            "variable": "step_494",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_394"
+                },
+                {
+                  "scalar": "yes"
+                }
+              ]
+            },
+            "next_step": "step_728"
+          },
+          {
+            "step": "step_728",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Fico feliz que está se sentindo bem. Gostaria de testar algum exercicio ?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Sim",
+                      "value": {
+                        "input": {
+                          "text": "Sim"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Não",
+                      "value": {
+                        "input": {
+                          "text": "Não"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text": "Eu não entendi, reformule sua resposta."
+                        }
+                      ],
+                      "response_type": "text"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "sys-yes-no",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_728",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_776"
+                },
+                {
+                  "value": "Bem",
+                  "from_entity": "entity_15219"
+                }
+              ]
+            },
+            "next_step": "step_896"
+          },
+          {
+            "step": "step_896",
+            "output": {
+              "generic": [
+                {
+                  "values": [],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_16791",
+                "parameters": null,
+                "result_variable": "step_896_result_1"
+              }
+            },
+            "variable": "step_896",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_728"
+                },
+                {
+                  "scalar": "yes"
+                }
+              ]
+            },
+            "next_step": "step_852"
+          },
+          {
+            "step": "step_852",
+            "output": {
+              "generic": [
+                {
+                  "values": [],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_15486",
+                "parameters": null,
+                "result_variable": "step_852_result_1"
+              }
+            },
+            "variable": "step_852",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_728"
+                },
+                {
+                  "scalar": "no"
+                }
+              ]
+            }
+          }
+        ],
+        "title": "Sentimento",
+        "action": "action_34738",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_34738_intent_42311"
+        },
+        "variables": [
+          {
+            "variable": "step_153_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_175_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_336_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Posso te ajudar. Você gostaria de uma recomendação de exercício ",
+            "variable": "step_394",
+            "data_type": "yes_no"
+          },
+          {
+            "title": "Certo. Me conte tudo sobre o que está passando.",
+            "variable": "step_421",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_421_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_436_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_483_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "No response",
+            "variable": "step_494",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_494_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_534_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_543_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Fico feliz que está se sentindo bem. Gostaria de testar algum ex",
+            "variable": "step_728",
+            "data_type": "yes_no"
+          },
+          {
+            "variable": "step_756_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_764_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Como você está se sentindo ?",
+            "variable": "step_776",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_804_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_805_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "No response",
+            "variable": "step_852",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_852_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "No response",
+            "variable": "step_896",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_896_result_1",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_943_result_1",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "action_1798",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true
+        },
+        "disambiguation_opt_out": false
+      }
+    ],
+    "intents": [
+      {
+        "intent": "action_15486_intent_14452",
+        "examples": [
+          {
+            "text": "Preciso ir"
+          },
+          {
+            "text": "Tchau"
+          },
+          {
+            "text": "Adeus"
+          },
+          {
+            "text": "Estou indo embora"
+          },
+          {
+            "text": "Até mais"
+          }
+        ]
+      },
+      {
+        "intent": "action_16791_intent_15896",
+        "examples": [
+          {
+            "text": "Exercicios"
+          }
+        ]
+      },
+      {
+        "intent": "action_14827_intent_32525",
+        "examples": [
+          {
+            "text": "Profissional"
+          }
+        ]
+      },
+      {
+        "intent": "action_14495_intent_25860",
+        "examples": [
+          {
+            "text": "Finalização"
+          }
+        ]
+      },
+      {
+        "intent": "action_1798_intent_18602",
+        "examples": [
+          {
+            "text": "Boa tarde"
+          },
+          {
+            "text": "Como vai?"
+          },
+          {
+            "text": "Boa noite"
+          },
+          {
+            "text": "Bom dia"
+          },
+          {
+            "text": "Ola"
+          },
+          {
+            "text": "Oi"
+          }
+        ]
+      },
+      {
+        "intent": "fallback_connect_to_agent",
+        "examples": [
+          {
+            "text": "Eu vou falar com um agente/ Eu vou falar com um agente de suporte."
+          },
+          {
+            "text": "Por favor, você pode entrar em contato comigo com um agente humano?"
+          },
+          {
+            "text": "Preciso contatar a um atendente"
+          },
+          {
+            "text": "Eu quero contatar um agente/Eu quero entrar em contato com um agente"
+          },
+          {
+            "text": "Você pode me conectar com uma pessoa real?"
+          }
+        ],
+        "description": "Solicite um agente humano."
+      },
+      {
+        "intent": "action_34738_intent_42311",
+        "examples": [
+          {
+            "text": "Nao estou me sentindo bem"
+          },
+          {
+            "text": "Nao me sinto bem"
+          },
+          {
+            "text": "Estou mal"
+          },
+          {
+            "text": "Estou triste"
+          },
+          {
+            "text": "Quero ajuda"
+          }
+        ]
+      }
+    ],
+    "entities": [
+      {
+        "entity": "entity_16295",
+        "values": [
+          {
+            "type": "synonyms",
+            "value": "Nao",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Sim",
+            "synonyms": []
+          }
+        ],
+        "fuzzy_match": true
+      },
+      {
+        "entity": "entity_15219",
+        "values": [
+          {
+            "type": "synonyms",
+            "value": "Mais ou menos",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Bem",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Mal",
+            "synonyms": []
+          }
+        ],
+        "fuzzy_match": true
+      },
+      {
+        "entity": "entity_15403",
+        "values": [
+          {
+            "type": "synonyms",
+            "value": "Não vou fazer",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Terminei",
+            "synonyms": []
+          }
+        ],
+        "fuzzy_match": true
+      },
+      {
+        "entity": "entity_5876",
+        "values": [
+          {
+            "type": "synonyms",
+            "value": "Meditação",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Respiração",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Ioga",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "5 sentidos",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Nenhum",
+            "synonyms": []
+          }
+        ],
+        "fuzzy_match": true
+      },
+      {
+        "entity": "sys-yes-no",
+        "values": []
+      }
+    ],
+    "metadata": {
+      "api_version": {
+        "major_version": "v2",
+        "minor_version": "2018-11-08"
+      },
+      "skill": {
+        "counts": {
+          "actions": 9,
+          "intents": 7,
+          "entities": 5,
+          "data_types": 4,
+          "global_variables": 2
+        }
+      }
+    },
+    "variables": [
+      {
+        "title": "nome",
+        "variable": "nome",
+        "data_type": "string",
+        "description": ""
+      },
+      {
+        "title": "sentimento",
+        "variable": "sentimento",
+        "data_type": "yes_no",
+        "description": "",
+        "initial_value": {
+          "scalar": "yes"
+        }
+      }
+    ],
+    "data_types": [
+      {
+        "title": "Confirmacao",
+        "entity": "entity_16295",
+        "response": {
+          "options": [
+            {
+              "label": "Sim",
+              "value": {
+                "input": {
+                  "text": "Sim"
+                }
+              }
+            },
+            {
+              "label": "Nao",
+              "value": {
+                "input": {
+                  "text": "Nao"
+                }
+              }
+            }
+          ],
+          "response_type": "option"
+        },
+        "data_type": "data-type_22942"
+      },
+      {
+        "title": "exercicio",
+        "entity": "entity_5876",
+        "response": {
+          "options": [
+            {
+              "label": "Meditação",
+              "value": {
+                "input": {
+                  "text": "Meditação"
+                }
+              }
+            },
+            {
+              "label": "Respiração",
+              "value": {
+                "input": {
+                  "text": "Respiração"
+                }
+              }
+            },
+            {
+              "label": "Ioga",
+              "value": {
+                "input": {
+                  "text": "Ioga"
+                }
+              }
+            },
+            {
+              "label": "5 sentidos",
+              "value": {
+                "input": {
+                  "text": "5 sentidos"
+                }
+              }
+            },
+            {
+              "label": "Nenhum",
+              "value": {
+                "input": {
+                  "text": "Nenhum"
+                }
+              }
+            }
+          ],
+          "response_type": "option"
+        },
+        "data_type": "data-type_43954"
+      },
+      {
+        "title": "Terminei",
+        "entity": "entity_15403",
+        "response": {
+          "options": [
+            {
+              "label": "Terminei",
+              "value": {
+                "input": {
+                  "text": "Terminei"
+                }
+              }
+            },
+            {
+              "label": "Não vou fazer",
+              "value": {
+                "input": {
+                  "text": "Não vou fazer"
+                }
+              }
+            }
+          ],
+          "response_type": "option"
+        },
+        "data_type": "data-type_46236"
+      },
+      {
+        "title": "Sentimento",
+        "entity": "entity_15219",
+        "response": {
+          "options": [
+            {
+              "label": "Bem",
+              "value": {
+                "input": {
+                  "text": "Bem"
+                }
+              }
+            },
+            {
+              "label": "Mal",
+              "value": {
+                "input": {
+                  "text": "Mal"
+                }
+              }
+            },
+            {
+              "label": "Mais ou menos",
+              "value": {
+                "input": {
+                  "text": "Mais ou menos"
+                }
+              }
+            }
+          ],
+          "response_type": "option"
+        },
+        "data_type": "data-type_48724"
+      }
+    ],
+    "counterexamples": [],
+    "system_settings": {
+      "topic_switch": {
+        "enabled": true,
+        "messages": {
+          "confirm_return": {
+            "text": ""
+          },
+          "confirm_switch": {
+            "text": ""
+          }
+        },
+        "question_steps_threshold": 2
+      },
+      "disambiguation": {
+        "prompt": "Você quis dizer:",
+        "enabled": true,
+        "randomize": true,
+        "max_suggestions": 5,
+        "suggestion_text_policy": "title",
+        "none_of_the_above_prompt": "Nenhum dos itens acima"
+      },
+      "intent_classification": {
+        "training_backend_version": "v2"
+      }
+    },
+    "learning_opt_out": false,
+    "language": "pt-br"
+  },
+  "description": "created for assistant 58eaa6dc-7758-442f-b1e1-1a59cfde3a7a",
+  "dialog_settings": {
+    "source_assistant": "ccc0a35d-3d7a-420d-a8d2-9faa6b9048a4"
+  },
+  "created": "2022-09-18T03:56:39.131Z",
+  "updated": "2022-09-18T03:56:39.131Z",
+  "snapshot": "1",
+  "assistant_id": "58eaa6dc-7758-442f-b1e1-1a59cfde3a7a",
+  "assistant_references": []
+}
