@@ -57,11 +57,8 @@ O projeto foi criado com o Watson Assistant, então caso queira acessar o códig
   <img align="center" width="300" height="500" src="./images/saudacao.png">
 </p>
 
-<br>
-
-# Como fazer upload do chatbot
-
+<br>    
 
 # Link do video
 
-    ...
+    https://www.youtube.com/watch?v=iTXXRW7qWfQ
