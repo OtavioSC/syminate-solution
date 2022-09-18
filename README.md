@@ -35,9 +35,27 @@ O projeto foi criado com o Watson Assistant, então caso queira acessar o códig
 
 # Como utilizar o chatbot
 
-Acesse o live preview
+### Acesse o live preview
 
     https://web-chat.global.assistant.watson.appdomain.cloud/preview.html?region=us-south&integrationID=0f9ae6a5-d8ea-469d-9a4f-040ee5dbfcf1&serviceInstanceID=f499be27-9cb9-474a-b4b2-2a67d6045077
+
+### Clique no botão indicado
+
+<br>
+
+<p align="center">
+  <img align="center" width="150" height="150" src="./images/botao.png">
+</p>
+
+<br>
+
+### Digite uma saudação (exemplo: "oi", "ola").
+
+<br>
+
+<p align="center">
+  <img align="center" width="300" height="500" src="./images/saudacao.png">
+</p>
 
 # Link do video
 
