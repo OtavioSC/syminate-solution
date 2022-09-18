@@ -1,7 +1,7 @@
 # Raposym - Challenge Sprint 3 
 
 <p align="center">
-  <img align="center" width="250" height="350" src="./screen.png">
+  <img align="center" width="250" height="350" src="./images/screen.png">
 </p>
 
 # Sobre
@@ -28,7 +28,7 @@ O projeto foi criado com o Watson Assistant, então caso queira acessar o códig
 # Fluxo conversacional
 
 <p align="center">
-  <img align="center" width="500" height="500" src="./fluxo.png">
+  <img align="center" width="500" height="500" src="./images/fluxo.png">
 </p>
 
 <br>
